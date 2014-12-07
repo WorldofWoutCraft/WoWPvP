@@ -25,7 +25,7 @@ public class CommandsHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
         if (command.getName().equals("wowpvp")) {
-            if (args.length == 1 && args[0] != null) {
+            if (args.length >= 1 && args[0] != null) {
                 WoWPvPCommand wowCommand = matchCommand(args[0]);
                 if (wowCommand != null) {
                     wowCommand.process(sender, args);

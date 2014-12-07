@@ -27,7 +27,7 @@ public class SetupCommand implements WoWPvPCommand, NormalCommand {
 
     @Override
     public String getPermission() {
-        return "wowpvp.command.setup";
+        return "wowpvp.command." + getName();
     }
 
     @Override

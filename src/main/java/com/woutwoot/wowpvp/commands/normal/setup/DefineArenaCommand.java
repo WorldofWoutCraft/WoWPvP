@@ -2,10 +2,12 @@ package com.woutwoot.wowpvp.commands.normal.setup;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
+import com.woutwoot.wowpvp.Main;
 import com.woutwoot.wowpvp.commands.NormalCommand;
 import com.woutwoot.wowpvp.commands.WoWPvPCommand;
 import com.woutwoot.wowpvp.setup.Messages;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -19,26 +21,27 @@ public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
 
     @Override
     public String getName() {
-        return "help";
+        return "definearena";
     }
 
     @Override
     public List<String> getAliases() {
         List<String> aliases = new ArrayList<>();
-        aliases.add("info");
-        aliases.add("tutorial");
+        aliases.add("defarena");
+        aliases.add("darena");
         return aliases;
     }
 
     @Override
     public String getPermission() {
-        return "wowpvp.command.help";
+        return "wowpvp.command." + getName();
     }
 
     @Override
     public void process(CommandSender sender, String[] args) {
         Messages messages = new Messages(sender);
         Player player;
+
         if (sender instanceof Player && sender != null) {
             player = (Player) sender;
         } else {
@@ -46,7 +49,18 @@ public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
             return;
         }
 
+        if (args.length != 2) {
+            messages.sendIncorrectNumberOfArgumentsMessage();
+            return;
+        }
+
         WorldEditPlugin we = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
+
+        if (we == null) {
+            messages.sendWorldEditNotInstalledMessage();
+            return;
+        }
+
         Selection sel = we.getSelection(player);
 
         if (sel == null) {
@@ -54,8 +68,11 @@ public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
             return;
         }
 
-        //TODO: Use selection to create arena.
+        Location c1 = sel.getMaximumPoint();
+        Location c2 = sel.getMaximumPoint();
 
+        Main.getInstance().getManager().createGame(args[1], c1, c2);
+        messages.sendArenaCreateSuccess();
     }
 
     @Override

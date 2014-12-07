@@ -36,9 +36,10 @@ public class Game {
     private Map<UUID, ItemStack[]> oldInventorys = new HashMap<>();
     private Map<UUID, ItemStack[]> oldArmors = new HashMap<>();
 
-    public Game(String name) {
+    public Game(String name, Location c1, Location c2) {
         this.name = name;
         this.startSignsTask();
+        this.arena = new Arena(c1, c2);
     }
 
     public String getName() {

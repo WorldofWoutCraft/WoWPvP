@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 
     private GameManager manager = new GameManager();
+
     private CommandsHandler commandsHandler = new CommandsHandler();
 
     private static Main instance;
@@ -43,7 +44,11 @@ public class Main extends JavaPlugin {
 
     private void init() {
         instance = this;
+        this.manager = new GameManager();
         this.getCommand("wowpvp").setExecutor(commandsHandler);
     }
 
+    public GameManager getManager() {
+        return manager;
+    }
 }

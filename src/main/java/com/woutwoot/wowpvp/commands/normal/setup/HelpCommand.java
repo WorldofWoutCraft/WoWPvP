@@ -28,7 +28,7 @@ public class HelpCommand implements WoWPvPCommand, NormalCommand {
 
     @Override
     public String getPermission() {
-        return "wowpvp.command.help";
+        return "wowpvp.command." + getName();
     }
 
     @Override

@@ -48,6 +48,7 @@ public class Messages {
         s("{pluginname} commands:");
         s("/{maincommand} [help] - Shows this message");
         s("/{maincommand} [setup] - Starts the setup wizard.");
+        s("/{maincommand} [definearena] (arenaname) - Create a new arena.");
     }
 
     public void sendMustBePlayerMessage() {
@@ -56,5 +57,17 @@ public class Messages {
 
     public void sendMustHaveSelectionCommand() {
         s("You must have a WorldEdit selection before you use this command.");
+    }
+
+    public void sendIncorrectNumberOfArgumentsMessage() {
+        s("Incorrect number of arguments.");
+    }
+
+    public void sendArenaCreateSuccess() {
+        s("Success! The arena has been defined. Now use \"/{maincommand} [setuplobby] (arenaname)\" to create a lobby for that arena.");
+    }
+
+    public void sendWorldEditNotInstalledMessage() {
+        s("You need to have WorldEdit installed to use this plugin.");
     }
 }
