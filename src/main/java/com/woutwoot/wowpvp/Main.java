@@ -1,9 +1,6 @@
 package com.woutwoot.wowpvp;
 
-import com.woutwoot.wowpvp.events.PlayerCommandHandler;
-import com.woutwoot.wowpvp.events.PlayerJoinHandler;
-import com.woutwoot.wowpvp.events.PlayerLeaveHandler;
-import com.woutwoot.wowpvp.events.PlayerTeleportHandler;
+import com.woutwoot.wowpvp.events.*;
 import com.woutwoot.wowpvp.game.GameManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 
     private GameManager manager = new GameManager();
+    private CommandsHandler commandsHandler = new CommandsHandler();
+
     private static Main instance;
 
     @Override
@@ -37,10 +36,14 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new PlayerLeaveHandler(), this);
         pm.registerEvents(new PlayerJoinHandler(), this);
         pm.registerEvents(new PlayerTeleportHandler(), this);
+        pm.registerEvents(new PlayerRespawnHandler(), this);
+        pm.registerEvents(new PlayerDeathHandler(), this);
+        pm.registerEvents(new PlayerChatHandler(), this);
     }
 
     private void init() {
         instance = this;
+        this.getCommand("wowpvp").setExecutor(commandsHandler);
     }
 
 }

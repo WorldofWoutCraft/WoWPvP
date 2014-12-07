@@ -9,10 +9,10 @@ import com.woutwoot.wowpvp.game.tasks.GameSignsTask;
 import com.woutwoot.wowpvp.game.tasks.GameTask;
 import com.woutwoot.wowpvp.game.tasks.GameTickTask;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Wout on 3/12/2014 - 22:20.
@@ -21,13 +21,20 @@ import java.util.List;
  */
 public class Game {
 
+    private String name;
     private Arena arena;
     private Lobby lobby;
-    private String name;
-    private List<Gamer> gamers = new LinkedList<>();
+
+    private Map<UUID, Gamer> gamers = new HashMap<>();
+
     private List<GameSign> signs = new ArrayList<>();
+
     private GameTask gameTickTask = new GameTickTask();
     private GameTask gameSignsTask = new GameSignsTask();
+
+    private Map<UUID, Location> oldLocations = new HashMap<>();
+    private Map<UUID, ItemStack[]> oldInventorys = new HashMap<>();
+    private Map<UUID, ItemStack[]> oldArmors = new HashMap<>();
 
     public Game(String name) {
         this.name = name;
@@ -42,12 +49,29 @@ public class Game {
         this.name = name;
     }
 
-    public List<Gamer> getGamers() {
+    public Map<UUID, Gamer> getGamers() {
         return gamers;
     }
 
     public void addGamer(Gamer gamer){
-        gamers.add(gamer);
+        gamers.put(gamer.getUuid(), gamer);
+        saveOldData(gamer);
+        gamer.clearInventoryAndPotionEffects();
+    }
+
+    public void removeGamer(Gamer gamer) {
+        gamer.clearPotionEffects();
+        gamer.heal();
+        gamer.getPlayer().getInventory().setContents(oldInventorys.get(gamer.getUuid()));
+        gamer.getPlayer().getInventory().setArmorContents(oldArmors.get(gamer.getUuid()));
+        gamer.getPlayer().teleport(oldLocations.get(gamer.getUuid()));
+        gamers.remove(gamer);
+    }
+
+    private void saveOldData(Gamer gamer) {
+        oldLocations.put(gamer.getUuid(), gamer.getPlayer().getLocation().clone());
+        oldInventorys.put(gamer.getUuid(), gamer.getPlayer().getInventory().getContents().clone());
+        oldArmors.put(gamer.getUuid(), gamer.getPlayer().getInventory().getArmorContents().clone());
     }
 
     public Arena getArena() {
@@ -80,5 +104,11 @@ public class Game {
 
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
+    }
+
+    public void broadcastMessage(String message) {
+        for (Gamer g : gamers.values()) {
+            g.sendMessage(message);
+        }
     }
 }

@@ -1,0 +1,13 @@
+ name: WoWPvP
+ version: 1.4.1
+ description: Just a simple PvP plugin that works!
+ author: woutwoot
+ website: http://woutwoot.com/wowpvp
+ main: com.woutwoot.wowpvp.Main
+ database: false
+ commands:
+    wowpvp:
+      description: Main WoWPvP command.
+      aliases: [wpvp]
+      permission: wowpvp.command
+      usage: Syntax error!

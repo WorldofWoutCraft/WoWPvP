@@ -1,13 +1,13 @@
 package com.woutwoot.wowpvp.game.gamer;
 
-import org.bukkit.entity.Player;
+import java.util.UUID;
 
 /**
  * Created by Wout on 3/12/2014 - 22:03.
  */
 public class Spectator extends Gamer {
 
-    public Spectator(Player player) {
+    public Spectator(UUID player) {
         super(player);
     }
 

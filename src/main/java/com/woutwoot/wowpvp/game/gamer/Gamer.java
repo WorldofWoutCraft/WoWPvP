@@ -1,28 +1,54 @@
 package com.woutwoot.wowpvp.game.gamer;
 
+import com.woutwoot.wowpvp.Main;
 import com.woutwoot.wowpvp.tools.Vars;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+
+import java.util.UUID;
 
 /**
  * Created by Wout on 3/12/2014 - 22:03.
  */
 public class Gamer {
 
-    private Player player;
+    private UUID uuid;
 
-    public Gamer(Player player) {
-        this.player = player;
+    public Gamer(UUID uuid) {
+        this.uuid = uuid;
     }
 
-    public Player getPlayer() {
-        return player;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public void sendMessage(String message){
-        player.sendMessage(Vars.tag + message);
+        getPlayer().sendMessage(Vars.tag + message);
     }
+
+    public Player getPlayer() {
+        return Main.getInstance().getServer().getPlayer(uuid);
+    }
+
+    public void clearInventoryAndPotionEffects() {
+        getPlayer().getInventory().setArmorContents(null);
+        getPlayer().getInventory().clear();
+        clearPotionEffects();
+    }
+
+    public void clearPotionEffects() {
+        for (PotionEffect effect : getPlayer().getActivePotionEffects()) {
+            getPlayer().removePotionEffect(effect.getType());
+        }
+    }
+
+    public void heal() {
+        getPlayer().setHealth(20);
+        getPlayer().setFoodLevel(20);
+    }
+
 }

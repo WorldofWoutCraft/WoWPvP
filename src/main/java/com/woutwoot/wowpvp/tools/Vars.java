@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 public class Vars {
 
     public static final String pluginName = "WoWPvP";
+    public static final String mainCommand = "wowpvp";
     public static final String tag = ChatColor.DARK_RED + "[" + pluginName + "] " + ChatColor.GOLD;
 
 }

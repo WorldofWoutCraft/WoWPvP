@@ -1,6 +1,7 @@
 package com.woutwoot.wowpvp.events;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
@@ -9,7 +10,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
  */
 public class PlayerCommandHandler implements Listener {
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerTryCommand(PlayerCommandPreprocessEvent event){
 
     }
