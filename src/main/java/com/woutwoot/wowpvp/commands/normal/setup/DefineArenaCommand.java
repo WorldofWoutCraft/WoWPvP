@@ -54,6 +54,7 @@ public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
             return;
         }
 
+        //TODO: Use selection to create arena.
 
     }
 
