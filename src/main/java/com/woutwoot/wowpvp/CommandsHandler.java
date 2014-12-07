@@ -1,8 +1,8 @@
 package com.woutwoot.wowpvp;
 
 import com.woutwoot.wowpvp.commands.WoWPvPCommand;
-import com.woutwoot.wowpvp.commands.normal.HelpCommand;
-import com.woutwoot.wowpvp.commands.normal.SetupCommand;
+import com.woutwoot.wowpvp.commands.normal.setup.HelpCommand;
+import com.woutwoot.wowpvp.commands.normal.setup.SetupCommand;
 import com.woutwoot.wowpvp.tools.Vars;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
