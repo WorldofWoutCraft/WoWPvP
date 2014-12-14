@@ -20,4 +20,11 @@ public class GameManager {
         return games.get(name);
     }
 
+    public void createGame(String name) {
+        games.put(name, new Game(name));
+    }
+
+    public void removeGame(String name) {
+        games.remove(name);
+    }
 }

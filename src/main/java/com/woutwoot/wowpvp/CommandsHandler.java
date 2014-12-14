@@ -1,9 +1,11 @@
 package com.woutwoot.wowpvp;
 
 import com.woutwoot.wowpvp.commands.WoWPvPCommand;
+import com.woutwoot.wowpvp.commands.normal.setup.DefineArenaCommand;
 import com.woutwoot.wowpvp.commands.normal.setup.HelpCommand;
 import com.woutwoot.wowpvp.commands.normal.setup.SetupCommand;
-import com.woutwoot.wowpvp.tools.Vars;
+import com.woutwoot.wowpvp.commands.normal.setup.SetupLobbyCommand;
+import com.woutwoot.wowpvp.setup.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,7 +32,7 @@ public class CommandsHandler implements CommandExecutor {
                 if (wowCommand != null) {
                     wowCommand.process(sender, args);
                 } else {
-                    sender.sendMessage(Vars.tag + "Invalid argument. Try /" + name + " help.");
+                    new Messages(sender).sendInvalidArgument();
                 }
             } else {
                 if (args.length == 0) {
@@ -45,6 +47,8 @@ public class CommandsHandler implements CommandExecutor {
     private void initCommands() {
         commands.add(new SetupCommand());
         commands.add(new HelpCommand());
+        commands.add(new DefineArenaCommand());
+        commands.add(new SetupLobbyCommand());
     }
 
     private WoWPvPCommand matchCommand(String s) {

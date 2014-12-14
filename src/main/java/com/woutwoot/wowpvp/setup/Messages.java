@@ -64,10 +64,18 @@ public class Messages {
     }
 
     public void sendArenaCreateSuccess() {
-        s("Success! The arena has been defined. Now use \"/{maincommand} [setuplobby] (arenaname)\" to create a lobby for that arena.");
+        s("Success! The arena has been defined. Now use \"/{maincommand} [setuplobby] (arenaname)\" to create a lobby for that arena. Make sure you use WorldEdit to select it first!");
     }
 
     public void sendWorldEditNotInstalledMessage() {
         s("You need to have WorldEdit installed to use this plugin.");
+    }
+
+    public void sendInvalidArgument() {
+        s("Invalid argument \"/{maincommand} [help] might help you :)");
+    }
+
+    public void sendLobbyCreateSuccess() {
+        s("Success! The lobby has been defined. Now use \"/{maincommand} [setlobbyspawn] (arenaname)\" to set the lobby spawn point. Make sure you move to the point where you want the spawn to be!");
     }
 }
