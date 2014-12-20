@@ -24,6 +24,7 @@ public class Game {
     private String name;
     private Arena arena;
     private Lobby lobby;
+    private GameRules rules;
 
     private Map<UUID, Gamer> gamers = new HashMap<>();
 
@@ -36,14 +37,16 @@ public class Game {
     private Map<UUID, ItemStack[]> oldInventorys = new HashMap<>();
     private Map<UUID, ItemStack[]> oldArmors = new HashMap<>();
 
+
     public Game(String name, Location c1, Location c2) {
         this(name);
-        this.startSignsTask();
         this.arena = new Arena(c1, c2);
     }
 
     public Game(String name) {
         this.name = name;
+        this.startSignsTask();
+        rules = new GameRules();
     }
 
     public String getName() {
@@ -62,6 +65,7 @@ public class Game {
         gamers.put(gamer.getUuid(), gamer);
         saveOldData(gamer);
         gamer.clearInventoryAndPotionEffects();
+        gamer.teleport(lobby.getRandomTeleportLocation());
     }
 
     public void removeGamer(Gamer gamer) {
@@ -100,7 +104,7 @@ public class Game {
     }
 
     private void startGameTask() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), gameSignsTask, 20L, 20L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), gameTickTask, 20L, 20L);
     }
 
     public Lobby getLobby() {

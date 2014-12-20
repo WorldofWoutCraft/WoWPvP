@@ -5,6 +5,8 @@ import com.woutwoot.wowpvp.game.GameManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+
 /**
  * Created by woutwoot on 3/12/2014 - 20:26.
  */
@@ -50,5 +52,14 @@ public class Main extends JavaPlugin {
 
     public GameManager getManager() {
         return manager;
+    }
+
+    /**
+     * Log a message to the console.
+     *
+     * @param s Message to log
+     */
+    public static void log(String s) {
+        getInstance().getLogger().log(Level.WARNING, s);
     }
 }
