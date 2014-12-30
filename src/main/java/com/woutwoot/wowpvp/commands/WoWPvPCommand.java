@@ -1,22 +1,29 @@
 package com.woutwoot.wowpvp.commands;
 
-import org.bukkit.command.CommandSender;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Wout on 4/12/2014 - 12:03.
  */
-public interface WoWPvPCommand {
+public abstract class WoWPvPCommand {
 
-    public String getName();
+    protected List<String> aliases = new ArrayList<>();
 
-    public List<String> getAliases();
+    public boolean match(String s) {
+        if (this.getName().equalsIgnoreCase(s) || this.getAliases().contains(s)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    public String getPermission();
+    public String getPermission() {
+        return "wowpvp.command." + getName();
+    }
 
-    public void process(CommandSender sender, String[] args);
+    public abstract String getName();
 
-    public boolean match(String s);
+    public abstract List<String> getAliases();
 
 }

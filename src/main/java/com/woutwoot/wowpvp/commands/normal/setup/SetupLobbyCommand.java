@@ -4,7 +4,6 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import com.woutwoot.wowpvp.Main;
 import com.woutwoot.wowpvp.commands.NormalCommand;
-import com.woutwoot.wowpvp.commands.WoWPvPCommand;
 import com.woutwoot.wowpvp.game.area.Lobby;
 import com.woutwoot.wowpvp.setup.Messages;
 import org.bukkit.Bukkit;
@@ -12,13 +11,13 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Wout on 10/12/2014 - 22:33.
  */
-public class SetupLobbyCommand implements WoWPvPCommand, NormalCommand {
+public class SetupLobbyCommand extends NormalCommand {
+
     @Override
     public String getName() {
         return "setuplobby";
@@ -26,14 +25,8 @@ public class SetupLobbyCommand implements WoWPvPCommand, NormalCommand {
 
     @Override
     public List<String> getAliases() {
-        List<String> aliases = new ArrayList<>(3);
         aliases.add("setlobby");
         return aliases;
-    }
-
-    @Override
-    public String getPermission() {
-        return "wowpvp.command." + getName();
     }
 
     @Override
@@ -74,12 +67,4 @@ public class SetupLobbyCommand implements WoWPvPCommand, NormalCommand {
         messages.sendLobbyCreateSuccess();
     }
 
-    @Override
-    public boolean match(String s) {
-        if (this.getName().equalsIgnoreCase(s) || this.getAliases().contains(s)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

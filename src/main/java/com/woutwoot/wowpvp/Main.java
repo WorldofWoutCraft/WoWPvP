@@ -2,6 +2,7 @@ package com.woutwoot.wowpvp;
 
 import com.woutwoot.wowpvp.events.*;
 import com.woutwoot.wowpvp.game.GameManager;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,7 +15,9 @@ public class Main extends JavaPlugin {
 
     private GameManager manager = new GameManager();
 
-    private CommandsHandler commandsHandler = new CommandsHandler();
+    private CommandsHandler commandsHandler;
+
+    private PluginManager pm;
 
     private static Main instance;
 
@@ -34,19 +37,20 @@ public class Main extends JavaPlugin {
     }
 
     private void registerEvents() {
-        PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new PlayerCommandHandler(), this);
-        pm.registerEvents(new PlayerLeaveHandler(), this);
-        pm.registerEvents(new PlayerJoinHandler(), this);
-        pm.registerEvents(new PlayerTeleportHandler(), this);
-        pm.registerEvents(new PlayerRespawnHandler(), this);
-        pm.registerEvents(new PlayerDeathHandler(), this);
-        pm.registerEvents(new PlayerChatHandler(), this);
+        registerListener(new PlayerCommandHandler());
+        registerListener(new PlayerLeaveHandler());
+        registerListener(new PlayerJoinHandler());
+        registerListener(new PlayerTeleportHandler());
+        registerListener(new PlayerRespawnHandler());
+        registerListener(new PlayerDeathHandler());
+        registerListener(new PlayerChatHandler());
     }
 
     private void init() {
         instance = this;
         this.manager = new GameManager();
+        pm = this.getServer().getPluginManager();
+        this.commandsHandler = new CommandsHandler();
         this.getCommand("wowpvp").setExecutor(commandsHandler);
     }
 
@@ -62,4 +66,9 @@ public class Main extends JavaPlugin {
     public static void log(String s) {
         getInstance().getLogger().log(Level.WARNING, s);
     }
+
+    public void registerListener(Listener listener) {
+        pm.registerEvents(listener, this);
+    }
+
 }

@@ -73,8 +73,9 @@ public class Lobby {
      * Tries to remove the location from the list. Has to be the same Block location.
      *
      * @param location
+     * @return true if the location was removed.
      */
-    public void removeTeleportLocation(Location location) {
+    public boolean removeTeleportLocation(Location location) {
         Location removeLocation = null;
         for (Location l : teleportLocations) {
             boolean x = l.getBlockX() == location.getBlockX();
@@ -87,6 +88,22 @@ public class Lobby {
         }
         if (removeLocation != null) {
             teleportLocations.remove(removeLocation);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Toggle a location to be added/removed.
+     *
+     * @return true when the location was added. Otherwise false.
+     */
+    public boolean toggleTeleportLocation(Location location) {
+        if (removeTeleportLocation(location)) {
+            return false;
+        } else {
+            addTeleportLocation(location);
+            return true;
         }
     }
 

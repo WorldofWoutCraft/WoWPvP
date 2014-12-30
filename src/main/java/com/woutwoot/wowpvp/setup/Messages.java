@@ -18,7 +18,7 @@ public class Messages {
     public void sendFirstInstructions() {
         s("Thank you for using {pluginname}! Let's get started shall we?");
         s("Step 1 is to create the actual arena where the game will be played.");
-        s("{playername}, Please select that arena using WorldEdit, and then use /{maincommand} [definearena] (arenaname)");
+        s("{playername}, Please select that arena using WorldEdit, and then use /{maincommand} [definearena] (gamename)");
     }
 
     /**
@@ -64,7 +64,7 @@ public class Messages {
     }
 
     public void sendArenaCreateSuccess() {
-        s("Success! The arena has been defined. Now use \"/{maincommand} [setuplobby] (arenaname)\" to create a lobby for that arena. Make sure you use WorldEdit to select it first!");
+        s("Success! The arena has been defined. Now use \"/{maincommand} [setuplobby] (gamename)\" to create a lobby for that arena. Make sure you use WorldEdit to select it first!");
     }
 
     public void sendWorldEditNotInstalledMessage() {
@@ -76,6 +76,26 @@ public class Messages {
     }
 
     public void sendLobbyCreateSuccess() {
-        s("Success! The lobby has been defined. Now use \"/{maincommand} [setlobbyspawn] (arenaname)\" to set the lobby spawn point. Make sure you move to the point where you want the spawn to be!");
+        s("Success! The lobby has been defined. Now use \"/{maincommand} [addlobbyspawns] (gamename)\" to add a lobby spawn point. Make sure you move to the point where you want the spawn to be!");
+    }
+
+    public void sendGameDoesNotExist() {
+        s("Sorry! That game does not exist. You can list the available games using \"/{maincommand} [listgames]\"");
+    }
+
+    public void sendLocationAdded() {
+        s("Your location has been added!");
+    }
+
+    public void sendLocationRemoved() {
+        s("Your location has been removed!");
+    }
+
+    public void sendEndAddingLobbySpawns() {
+        s("You stopped adding spawns for this lobby!"); //TODO: Add next thing to do
+    }
+
+    public void sendStartAddingLobbySpawns() {
+        s("You can now add spawns for this lobby! Just right click!");
     }
 }

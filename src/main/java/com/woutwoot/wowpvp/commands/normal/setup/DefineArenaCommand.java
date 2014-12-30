@@ -4,20 +4,18 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import com.woutwoot.wowpvp.Main;
 import com.woutwoot.wowpvp.commands.NormalCommand;
-import com.woutwoot.wowpvp.commands.WoWPvPCommand;
 import com.woutwoot.wowpvp.setup.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Wout on 4/12/2014 - 12:02.
  */
-public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
+public class DefineArenaCommand extends NormalCommand {
 
     @Override
     public String getName() {
@@ -26,15 +24,9 @@ public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
 
     @Override
     public List<String> getAliases() {
-        List<String> aliases = new ArrayList<>();
         aliases.add("defarena");
         aliases.add("darena");
         return aliases;
-    }
-
-    @Override
-    public String getPermission() {
-        return "wowpvp.command." + getName();
     }
 
     @Override
@@ -75,13 +67,5 @@ public class DefineArenaCommand implements WoWPvPCommand, NormalCommand {
         messages.sendArenaCreateSuccess();
     }
 
-    @Override
-    public boolean match(String s) {
-        if (this.getName().equalsIgnoreCase(s) || this.getAliases().contains(s)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 }
