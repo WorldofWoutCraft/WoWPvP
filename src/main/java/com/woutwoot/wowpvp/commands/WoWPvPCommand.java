@@ -26,4 +26,5 @@ public abstract class WoWPvPCommand {
 
     public abstract List<String> getAliases();
 
+    public abstract String getDescription();
 }

@@ -1,4 +1,4 @@
-package com.woutwoot.wowpvp.commands.normal.setup;
+package com.woutwoot.wowpvp.commands.normal.game;
 
 import com.woutwoot.wowpvp.commands.NormalCommand;
 import com.woutwoot.wowpvp.setup.Messages;
@@ -21,6 +21,11 @@ public class HelpCommand extends NormalCommand {
         aliases.add("info");
         aliases.add("tutorial");
         return aliases;
+    }
+
+    @Override
+    public String getDescription() {
+        return "The help command.";
     }
 
     @Override

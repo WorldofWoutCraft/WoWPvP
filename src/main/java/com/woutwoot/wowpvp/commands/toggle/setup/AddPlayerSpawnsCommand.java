@@ -11,27 +11,27 @@ import java.util.List;
 /**
  * Created by Wout on 4/12/2014 - 12:02.
  */
-public class AddLobbySpawnsCommand extends ToggleCommand {
+public class AddPlayerSpawnsCommand extends ToggleCommand {
 
-    public AddLobbySpawnsCommand() {
+    public AddPlayerSpawnsCommand() {
         super();
     }
 
     @Override
     public String getName() {
-        return "addlobbyspawns";
+        return "addplayerspawns";
     }
 
     @Override
     public List<String> getAliases() {
-        aliases.add("addlspawns");
-        aliases.add("addlspawn");
+        aliases.add("addpspawns");
+        aliases.add("addpspawn");
         return aliases;
     }
 
     @Override
     public String getDescription() {
-        return "Command to add teleport locations to the lobby.";
+        return "Command to add spawn locations for players to the arena.";
     }
 
     @Override
@@ -46,6 +46,11 @@ public class AddLobbySpawnsCommand extends ToggleCommand {
 
         if (Main.getInstance().getManager().getGame(args[1]) != null) {
             Game game = Main.getInstance().getManager().getGame(args[1]);
+            if (game.getArena().toggleSpawnLocation(player.getLocation())) {
+                m.sendLocationAdded();
+            } else {
+                m.sendLocationRemoved();
+            }
             if (game.getLobby().toggleTeleportLocation(player.getLocation())) {
                 m.sendLocationAdded();
             } else {
@@ -58,12 +63,12 @@ public class AddLobbySpawnsCommand extends ToggleCommand {
 
     @Override
     protected void sendOffMessage(Player player) {
-        new Messages(player).sendEndAddingLobbySpawns();
+        new Messages(player).sendEndAddingPlayerSpawns();
     }
 
     @Override
     protected void sendOnMessage(Player player) {
-        new Messages(player).sendStartAddingLobbySpawns();
+        new Messages(player).sendStartAddingPlayerSpawns();
     }
 
 }

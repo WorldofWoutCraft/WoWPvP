@@ -1,5 +1,7 @@
 package com.woutwoot.wowpvp.setup;
 
+import com.woutwoot.wowpvp.Main;
+import com.woutwoot.wowpvp.commands.WoWPvPCommand;
 import com.woutwoot.wowpvp.tools.Vars;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -36,7 +38,7 @@ public class Messages {
 
         message = message.replace("{pluginname}", ChatColor.DARK_RED + Vars.pluginName + mainColor);
         message = message.replace("{playername}", sender.getName());
-        message = message.replace("{maincommand}", Vars.mainCommand);
+        message = message.replace("{maincommand}", ChatColor.DARK_RED + Vars.mainCommand + mainColor);
         message = message.replace("[", pluginArg.toString());
         message = message.replace("]", mainColor.toString());
         message = message.replace("(", playerArg.toString());
@@ -46,9 +48,12 @@ public class Messages {
 
     public void sendHelpMessage() {
         s("{pluginname} commands:");
+        if (sender.hasPermission("wowpvp.admin")) {
+            for (WoWPvPCommand command : Main.getInstance().getCommandsHandler().getCommands()) {
+                s("/{maincommand} [" + command.getName() + "] - " + command.getDescription());
+            }
+        }
         s("/{maincommand} [help] - Shows this message");
-        s("/{maincommand} [setup] - Starts the setup wizard.");
-        s("/{maincommand} [definearena] (arenaname) - Create a new arena.");
     }
 
     public void sendMustBePlayerMessage() {
@@ -76,7 +81,7 @@ public class Messages {
     }
 
     public void sendLobbyCreateSuccess() {
-        s("Success! The lobby has been defined. Now use \"/{maincommand} [addlobbyspawns] (gamename)\" to add a lobby spawn point. Make sure you move to the point where you want the spawn to be!");
+        s("Success! The lobby has been defined. Now use \"/{maincommand} [addlobbyspawns] (gamename)\" to add lobby spawn points.");
     }
 
     public void sendGameDoesNotExist() {
@@ -92,10 +97,18 @@ public class Messages {
     }
 
     public void sendEndAddingLobbySpawns() {
-        s("You stopped adding spawns for this lobby!"); //TODO: Add next thing to do
+        s("You stopped adding spawns for this lobby! Now use \"/{maincommand} [addplayerspawns] (gamename)\" to add arena spawn points.");
     }
 
     public void sendStartAddingLobbySpawns() {
         s("You can now add spawns for this lobby! Just right click!");
+    }
+
+    public void sendEndAddingPlayerSpawns() {
+        s("You stopped adding spawns for this arena!"); //TODO: Add next thing to do
+    }
+
+    public void sendStartAddingPlayerSpawns() {
+        s("You can now add spawns for this arena! Just right click!");
     }
 }

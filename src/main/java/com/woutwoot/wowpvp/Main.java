@@ -71,4 +71,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(listener, this);
     }
 
+    public CommandsHandler getCommandsHandler() {
+        return commandsHandler;
+    }
 }

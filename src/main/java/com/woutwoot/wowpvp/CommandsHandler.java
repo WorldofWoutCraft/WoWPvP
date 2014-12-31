@@ -3,11 +3,12 @@ package com.woutwoot.wowpvp;
 import com.woutwoot.wowpvp.commands.NormalCommand;
 import com.woutwoot.wowpvp.commands.ToggleCommand;
 import com.woutwoot.wowpvp.commands.WoWPvPCommand;
+import com.woutwoot.wowpvp.commands.normal.game.HelpCommand;
 import com.woutwoot.wowpvp.commands.normal.setup.DefineArenaCommand;
-import com.woutwoot.wowpvp.commands.normal.setup.HelpCommand;
 import com.woutwoot.wowpvp.commands.normal.setup.SetupCommand;
 import com.woutwoot.wowpvp.commands.normal.setup.SetupLobbyCommand;
 import com.woutwoot.wowpvp.commands.toggle.setup.AddLobbySpawnsCommand;
+import com.woutwoot.wowpvp.commands.toggle.setup.AddPlayerSpawnsCommand;
 import com.woutwoot.wowpvp.setup.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -67,6 +68,7 @@ public class CommandsHandler implements CommandExecutor {
         //GAME
         //SETUP
         commands.add(new AddLobbySpawnsCommand());
+        commands.add(new AddPlayerSpawnsCommand());
     }
 
     private WoWPvPCommand matchCommand(String s) {
@@ -76,5 +78,9 @@ public class CommandsHandler implements CommandExecutor {
             }
         }
         return null;
+    }
+
+    public List<WoWPvPCommand> getCommands() {
+        return commands;
     }
 }

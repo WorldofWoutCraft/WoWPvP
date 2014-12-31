@@ -30,6 +30,11 @@ public class DefineArenaCommand extends NormalCommand {
     }
 
     @Override
+    public String getDescription() {
+        return "Command to define the game area.";
+    }
+
+    @Override
     public void process(CommandSender sender, String[] args) {
         Messages messages = new Messages(sender);
         Player player;

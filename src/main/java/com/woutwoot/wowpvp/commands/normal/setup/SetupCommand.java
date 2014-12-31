@@ -23,6 +23,11 @@ public class SetupCommand extends NormalCommand {
     }
 
     @Override
+    public String getDescription() {
+        return "Setup wizard command";
+    }
+
+    @Override
     public void process(CommandSender sender, String[] args) {
         new Messages(sender).sendFirstInstructions();
     }
